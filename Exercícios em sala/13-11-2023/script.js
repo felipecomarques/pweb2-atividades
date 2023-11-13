@@ -7,9 +7,22 @@ const buscarGatinhos = (e) => {
             if (xhr.status === 200) {
                 const cats = JSON.parse(xhr.responseText)
                 cats.forEach(cat => {
-                    const img = document .createElement ('img')
+                    const img = document.createElement('img')
                     img.src = cat.url
-                    document.querySelector("#gatinhos").appendChild(img)
+
+                    const idElement = document.createElement('p')
+                    idElement.textContent = `ID do gatinho: ${cat.id}`
+
+                    const resolutionElement = document.createElement('p');
+                    resolutionElement.textContent = `Resolução do Gatinho: ${cat.width} x ${cat.height}`;
+
+                    const container = document.createElement('div');
+                    container.classList.add('cat-container');
+                    container.appendChild(img);
+                    container.appendChild(idElement);
+                    container.appendChild(resolutionElement);
+
+                    document.querySelector("#gatinhos").appendChild(container);
                 })
             } else {
                 alert ('Erro na requisição')
